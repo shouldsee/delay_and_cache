@@ -136,10 +136,21 @@ class DelayParam(CallableProxy):
         cls = self.__class__
         self._name  = name
         self._frame = frame__default() if cls._frame is None else cls._frame
-        self._callable = lambda *a,**kw: name__lookup(
+        def clb(self=self, *a,**kw):
+            x = name__lookup(
             name = self._name,
             frame= self._frame,
-            level= -1)(*a,**kw)
+            level= -1)            
+            if callable(x):
+                return x(*a,**kw)
+            else:
+                return x
+        self._callable = clb
+        
+#         self._callable = lambda *a,**kw: name__lookup(
+#             name = self._name,
+#             frame= self._frame,
+#             level= -1)(*a,**kw)
     @staticmethod
     def __prj__(self):
         '''
@@ -190,11 +201,12 @@ def func__cachedCastDelayedParam(f,frame=None):
     f = func__castDelayedParam(f, frame__default(frame))
     f = CachedProxy(f)
     return f
+
 delay_and_cache = _fccdp = func__cachedCastDelayedParam
 
 def cacheThisFrame():
     d =  frame__default().f_locals
-    return [x() for x in d.values()]
+    return [x() if callable(x) else x for x in d.values() ]
 
 _ctf = cacheThisFrame
 _cpx = CachedProxy

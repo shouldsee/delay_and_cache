@@ -202,59 +202,58 @@ _upx = UnrollProxy
 _dpar = DelayParam
 
 
-import inspect
-
-@_cpx
-def start():
-    return 1
-
-
-@_cpx
-def step( a=_dpar("start"), b=_dpar("end")):
-    a = _upx(a)
-    b = _upx(b)
-    
-    return a + b
-    
-@_cpx
-@_fcdpar
-def step2( a=("start"), b="end"):
-    a = _upx(a)
-    b = _upx(b)
-    return a + b
-
-
-@_fccdp
-def step3( a=("start"), b="end"):
-    a = _upx(a)
-    b = _upx(b)
-    return a + b
-
-@_fcdpar
-@_cpx
-def step4( a=("start"), b="end"):
-    a = _upx(a)
-    b = _upx(b)
-    return a - b
-
-
-@_cpx
-@_fcdpar
-def step5( a=("start"), b="end"):
-    return a() + b()
-
-
-@_fccdp
-def step6( a=("start"), b="end"):
-    _ctf()
-    print "Middle"
-    return a() + b()
-
-@_cpx
-def end():
-    return 2
 
 if __name__ == '__main__':
+    @_cpx
+    def start():
+        return 1
+
+
+    @_cpx
+    def step( a=_dpar("start"), b=_dpar("end")):
+        a = _upx(a)
+        b = _upx(b)
+
+        return a + b
+
+    @_cpx
+    @_fcdpar
+    def step2( a=("start"), b="end"):
+        a = _upx(a)
+        b = _upx(b)
+        return a + b
+
+
+    @_fccdp
+    def step3( a=("start"), b="end"):
+        a = _upx(a)
+        b = _upx(b)
+        return a + b
+
+    @_fcdpar
+    @_cpx
+    def step4( a=("start"), b="end"):
+        a = _upx(a)
+        b = _upx(b)
+        return a - b
+
+
+    @_cpx
+    @_fcdpar
+    def step5( a=("start"), b="end"):
+        return a() + b()
+
+
+    @_fccdp
+    def step6( a=("start"), b="end"):
+        _ctf()
+        print "Middle"
+        return a() + b()
+
+    @_cpx
+    def end():
+        return 2
+
     CachedProxy._DEBUG = 1
 #     class CachedProxy(CallableProxy):
     assert step2 == step == step3

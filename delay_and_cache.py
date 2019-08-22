@@ -202,7 +202,6 @@ _upx = UnrollProxy
 _dpar = DelayParam
 
 
-
 if __name__ == '__main__':
     @_cpx
     def start():
@@ -247,7 +246,7 @@ if __name__ == '__main__':
     @_fccdp
     def step6( a=("start"), b="end"):
         _ctf()
-        print "Middle"
+        print ("[Middle]",)
         return a() + b()
 
     @_cpx

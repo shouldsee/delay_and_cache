@@ -7,6 +7,8 @@ Inspired by
   - https://github.com/janrain/lazydict
   - https://github.com/ionelmc/python-lazy-object-proxy
 
+## ToDo:
+- Error traceback
 
 ## Example 
 

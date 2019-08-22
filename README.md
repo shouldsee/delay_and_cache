@@ -3,6 +3,10 @@
 # delay_and_cache
 
 A python extension that delays evaluation of function defaults and cache their outputs.
+Inspired by
+  - https://github.com/janrain/lazydict
+  - https://github.com/ionelmc/python-lazy-object-proxy
+
 
 ## Example 
 

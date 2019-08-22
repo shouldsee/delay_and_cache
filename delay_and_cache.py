@@ -58,7 +58,9 @@ def func__castingDefaults(casters):
         casters = itertools.cycle([casters])
     def dec(f):
         _defaults = ()
-        for i,(caster,val) in enumerate(zip(casters, f.__defaults__)):
+        for i,(caster,val) in enumerate(
+            zip(casters, f.__defaults__ or [] )
+        ):
             _defaults  += (caster(val),)
         g = types.FunctionType(f.__code__, 
                                f.__globals__, 

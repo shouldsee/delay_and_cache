@@ -19,7 +19,8 @@ setup(
 	name='delay_and_cache',
 	version='0.1',
 	packages=[
-        'delay_and_cache',
+'.'
+#        'delay_and_cache',
              ],
     include_package_data=True,    
 	license='MIT',

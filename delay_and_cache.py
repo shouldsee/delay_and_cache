@@ -3,6 +3,11 @@ import types
 import itertools
 import inspect
 
+def func__currName():
+    return inspect.currentframe().f_back.f_code.co_name    
+_fkey = func__currName
+
+
 def rgetattr_dft(obj,attr,dft):
     _this_func = rgetattr_dft
     sp = attr.split('.',1)

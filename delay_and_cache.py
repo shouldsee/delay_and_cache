@@ -3,6 +3,47 @@ import types
 import itertools
 import inspect
 
+import json
+def dppJson(d,**kw):
+    '''
+    dirtly serialise and pretty print a dictionary
+    '''
+    s = json.dumps(d,indent=4, sort_keys=True,defaut=repr,**kw)
+    return s
+
+class StaticClass(type):
+    '''
+    Force all function attributess to be staticmethod()s
+    '''
+    _DEBUG = 0
+    def __new__(meta, cls_name, cls_bases, cls_attrs):
+#         lcs = {}
+        for k,v in cls_attrs.iteritems():
+            if inspect.isfunction(v):
+                cls_attrs[k] = staticmethod(v)
+            elif inspect.isclass(v):
+                pass
+            elif callable(v):
+                pass
+            elif inspect.ismethoddescriptor(v):
+                assert isinstance(v,staticmethod),(k,type(v),)
+            else:
+                ### collect con
+#                 lcs[k] = v
+                pass
+
+            if meta._DEBUG:
+                print (inspect.ismethod(v),
+                       inspect.isclass(v),
+                       inspect.isfunction(v),
+                       inspect.ismethoddescriptor(v),
+                       callable(v),
+                       k,
+                       v)
+
+        cls = type.__new__(meta, cls_name, cls_bases, cls_attrs)
+        return cls
+    
 def func__currName():
     return inspect.currentframe().f_back.f_code.co_name    
 _fkey = func__currName

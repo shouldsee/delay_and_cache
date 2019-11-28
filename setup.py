@@ -8,11 +8,6 @@ DIR= os.path.dirname(__file__)
 if DIR:
 	os.chdir(DIR)
 
-FILE =  'requirements.txt'
-required = [ x.strip() for x in open( FILE,'r')  if not x.strip().startswith('#') ] 
-required = [ x.strip() for x in required if x.find(' @ ')==-1 and x ] 
-required = [ x.strip() for x in required if x.find('git+')==-1 and x ] 
-
 
 print (required)
 setup(
@@ -27,22 +22,11 @@ setup(
 	author='Feng Geng',
 	author_email='shouldsee.gem@gmail.com',
 	long_description=open('README.md').read(),
-	install_requires = required,
-    
-#   entry_points = {
-#           'console_scripts': [
-#               'command-name = pymisca.directory_hashmirror_0520:main',                  
-#           ],              
-#       },
-#     scripts = glob.glob('bin/*.py') ,
-#     package_data={'pymisca': ['*.sh','*.json','*.csv','*.tsv','*.npy','*.pk',
-#                               'templates/*.html',
-# #                              'resources/*','genomeConfigs/*',
-#                              ],
-# #                  'runtime_data':['wraptool/*.{ext}'.format(**locals()) 
-# #                                  for ext in 
-# #                                  ['json','csv','tsv','npy','pk']],
-#                  },
+	install_requires=[
+		x.strip() for x in open("requirements.txt","r") 
+        	if x.strip() and not x.strip().startswith("#") 
+	],
+
 )
 
 

@@ -4,12 +4,6 @@ from distutils.core import setup
 #import setuptools
 import os,glob,sys
 
-# DIR= os.path.dirname(__file__)
-# if DIR:
-# 	os.chdir(DIR)
-
-
-print (required)
 setup(
 	name='delay_and_cache',
 	version='0.1',
